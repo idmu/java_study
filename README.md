@@ -4,6 +4,8 @@ MyBatis、Spring、SpringMVC使用详解
 ### java笔记相关
 
 - [mybatis基本使用之(配置文件)](note/mybatis基本使用之(配置文件).md)  
+- [mysql的基本使用](note/mysql基础教程.md)  
+
 
 ### 简单的实例Demo
 - [mybatis文件配置](demo/mybatis文件配置) 
