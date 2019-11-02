@@ -3,7 +3,7 @@
 ### java笔记相关
 - [Spring使用之基于注解的Ioc配置](note/Spring使用之基于注解的Ioc配置.md)
 - [Spring使用之基于xml的Ioc配置](note/Spring使用之基于xml的Ioc配置.md)
-- [mybatis基本使用之(配置文件)](note/mybatis基本使用之(配置文件).md)  
+- [mybatis基本使用之(xml)](note/mybatis基本使用之(xml).md)  
 - [mysql的基本使用](note/mysql基础教程.md)  
 
 
