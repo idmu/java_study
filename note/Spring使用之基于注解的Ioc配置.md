@@ -171,6 +171,7 @@ IAccountService as = ac.getBean("accountService",IAccountService.class);
 @RunWith(SpringJUnit4ClassRunner.class)
 ```
 之所以需要替换,是以为junit单元测试中, 没有main方法也能执行, junit本身集成了一个main方法, 该方法会判断当前测试类中哪些方法包含@Test的注解,junit就会让这些带有@Test的方法执行. 而junit本身并不会关注我们的程序是否集成了spring,所以在执行测试方法时候, 它也不会为我们读取配置文件或配置类来为我们创建容器.查看源码可知, SpringJUnit4ClassRunner其本身也是继承了junit. 虽然junit不会为我们创建容器,由于SpringJUnit4ClassRunner是spring提供,所以它一定会为我们创建容器.
+
 3)告知spring的运行期,spring的Ioc创建是基于xml还是注解.并且通过@ContextConfiguration 注解来说明位置.
 @ContextConfiguration 注解:
 其中,
