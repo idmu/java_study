@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--配置spring的Ioc, 配置Service对象-->
+    <bean id="accountService" class="com.mine.service.impl.AccountServiceImpl"></bean>
+
+    <!--spring中基于xml的Aop配置步骤:
+            1. 把通知的bean配置进来, 交给spring管理-
+            2. 使用aop:config标签来表示aop开始的位置
+            3. 使用aop:aspect标签表示开始配置切面
+            id属性 给切面提供一个唯一标识
+            ref 指定通知类bean的id
+            4. 在aop:aspect标签内部使用对应的标签来配置通知类型
+                 aop:before 表前置通知,其中:
+                 method方法属性表示当前设置的id类中哪个方法是前置通知
+                 pointcut属性用于指定切入点表达式,该表达式的含义是指对当前的业务层中哪些方法增强
+                 切入点表达式的写法:
+                 execution(表达式)
+                 表达式:访问修饰符 返回值 包名.包名.包名...类名.方法名(参数列表)
+                 例如:public void com.mine.service.impl.AccountServiceImpl.saveAccount()
+
+                 -->
+            <!--配置logger-->
+    <bean id="logger" class="com.mine.utils.Logger"></bean>
+    <!--aop配置-->
+    <aop:config>
+        <!--关于切面表达式,id属性用于表达切面表达式的唯一标识,
+           expression用于指定表达式内容, 此标签写在aop:aspect内部表示只有当前切面可用,写在外面表示所有切面可用.-->
+        <aop:pointcut id="pt" expression="execution(* com..mine.service.impl.*.*(..))"/>
+        <aop:aspect id="loggerAdvice" ref="logger">
+            <!--建立通知方法和切入点方法的关联-->
+            <!--
+        <aop:before method="beforePrintLog" pointcut-ref="pt"></aop:before>
+        <aop:after-returning method="afterReturningPrintLog" pointcut-ref="pt"></aop:after-returning>
+        <aop:after-throwing method="afterThrowingPrintLog"  pointcut-ref="pt"></aop:after-throwing>
+        <aop:after method="afterPrintLog"  pointcut-ref="pt"></aop:after>
+            -->
+            <!--环绕通知-->
+            <aop:around method="aroundPringLog" pointcut-ref="pt"></aop:around>
+        </aop:aspect>
+    </aop:config>
+</beans>
