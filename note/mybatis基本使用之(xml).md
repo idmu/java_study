@@ -1,5 +1,4 @@
 #### 基本环境搭建
-
 1 新建一个无骨架的maven工程, 要在maven的directory中指定maven的安装路径和setting.xml,responstory的位置.
 2  删除新建工程src目录,让其成为一个父类,充当父工程的角色.这样设计的目的是不需要在重复的为后来新建的模块设置对应的jar依赖.
 3 在pom.xml中导入常用的jar包,如mysql, mybatis,junit等.
@@ -115,8 +114,7 @@ public class MybatisUtils {
 ```
 
 常见错误:
-
-- 配置文件没有注册,错误提示如下:
+* 配置文件没有注册,错误提示如下:
 
 ```java
 org.apache.ibatis.binding.BindingException: Type interface 
@@ -132,7 +130,7 @@ com.mine.dao.UserDao is not known to the MapperRegistry.
     </mappers>
 ```
 
-- 配置文件无法导入或生效的问题.即resouces中的配置文件导出失败.解决方案是在build中配置resource.
+* 配置文件无法导入或生效的问题.即resouces中的配置文件导出失败.解决方案是在build中配置resource.
 
 ```java
 <build>
@@ -159,11 +157,11 @@ com.mine.dao.UserDao is not known to the MapperRegistry.
 
 #### CRUD操作
 
-- namespace中的包名要和Dao/Mapper中的接口的包名保持一致.
-- select选择查询语句
-  - id: 指的就是namespace中的方法名.
-  - resultType: sql语句执行的返回值.
-  - parameterType: 参数类型. 
+* namespace中的包名要和Dao/Mapper中的接口的包名保持一致.
+* select选择查询语句
+  * id: 指的就是namespace中的方法名.
+  * resultType: sql语句执行的返回值.
+   * parameterType: 参数类型. 
 
 注意点: 增删改需要提交事务.
 例如:
@@ -203,11 +201,9 @@ public interface UserMapper {
 #### 配置解析优化
 
 ###### 环境配置（environments)
-
 尽管可以配置多个环境，但每个 SqlSessionFactory 实例只能选择一种环境.可以通过默认使用的环境 ID（default="development"）属性来切换配置环境。
 
-###### 属性（properties）
-
+######  属性（properties）
 可以通过properties属性来实现引用配置文件,这些属性都是可以外部配置且动态替换,既可以在典型的java属性文件中配置,亦可以通过properties元素的子元素来传递.
 例如:  
 (1)我们可以在resources下新建一个db. properties文件,在其中配置db相关的设置.
@@ -243,17 +239,14 @@ password=12345678
 
 ```
 
-- 关于引入外部文件的注意事项:
-  (1)可以直接引入
-  (2)可以在其中增加一些属性配置
-  (3)如果两个文件同一个字段,则会优先使用外部配置文件的.比如我们在db. properties中配置了账户密码,在核心配置文件中引入db. properties之后,在properties标签中也配置了账户密码,那么此时会优先使用外部配置文件db. properties中的账户密码.
-
-##### 类型别名（typeAliases）
-
+* 关于引入外部文件的注意事项:
+(1)可以直接引入
+(2)可以在其中增加一些属性配置
+(3)如果两个文件同一个字段,则会优先使用外部配置文件的.比如我们在db. properties中配置了账户密码,在核心配置文件中引入db. properties之后,在properties标签中也配置了账户密码,那么此时会优先使用外部配置文件db. properties中的账户密码.
+#####类型别名（typeAliases）
 类型别名目的是为Java类型设置一个短的名字,它只和 XML 配置有关,存在的意义仅在于用来减少类完全限定名的冗余.
-
-- 给类型取别名有两种方式:
-  (1)直接使用typeAlias标签
+* 给类型取别名有两种方式:
+(1)直接使用typeAlias标签
 
 ```java
   <typeAliases>
@@ -307,14 +300,11 @@ MapperRegistry主要是帮助我们注册绑定Mapper文件.有三种实现方�
 其中方法(2)和(3)中需要尤其注意:
 接口和Mapper配置文件必须同名
 接口和Mapper配置文件必须在同一个包下.
-
 #### 日志
-
 如果数据库操作,出现异常,则需要排错,日志就是最好的帮手.
 日志工厂:logImpl
 (1)STDOUT_LOGGING为标准日志工厂实现.
-
-- 在mybatis的核心配置文件中,配置我们的日志
+* 在mybatis的核心配置文件中,配置我们的日志
 
 ```java
 <!--日志配置-->
@@ -324,14 +314,13 @@ MapperRegistry主要是帮助我们注册绑定Mapper文件.有三种实现方�
 ```
 
 (2)LOG4J
-
-- 可以控制日志信息输送的目的地是控制台、文件、GUI组件等
-- 可以控制每一条日志的输出格式
-- 可以定义每一条日志信息的级别，我们能够更加细致地控制日志的生成过程
-- 可以通过一个配置文件来灵活地进行配置，而不需要修改应用的代码。
-  log4j的配置:
-  (1)先导入log4j依赖包.
-  (2)log4j.properties配置
+*  可以控制日志信息输送的目的地是控制台、文件、GUI组件等
+* 可以控制每一条日志的输出格式
+ * 可以定义每一条日志信息的级别，我们能够更加细致地控制日志的生成过程
+ * 可以通过一个配置文件来灵活地进行配置，而不需要修改应用的代码。
+log4j的配置:
+(1)先导入log4j依赖包.
+(2)log4j.properties配置
 
 ```java
 ### 配置根 ###
