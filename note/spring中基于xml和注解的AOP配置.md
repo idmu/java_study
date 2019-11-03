@@ -193,4 +193,3 @@ public class AopTest {
 }
 
 ```
-附: [aop的xml配置完整demo](https://github.com/mayboo/java_study/tree/master/demo/spring%E5%9F%BA%E4%BA%8Exml%E7%9A%84Aop%E9%85%8D%E7%BD%AE)
