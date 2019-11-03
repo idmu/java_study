@@ -9,6 +9,8 @@
 
 
 ### 简单的实例Demo
+
+- [spring基于xml的声明式事务控制](demo/spring基于xml的声明式事务控制) 
 - [mybatis文件配置](demo/mybatis文件配置) 
 - [spring基于xml的Ioc配置](demo/spring基于xml的Ioc配置) 
 - [spring中jdbcTemplate的使用](demo/spring中jdbcTemplate的使用)
