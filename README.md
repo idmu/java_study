@@ -10,3 +10,4 @@
 ### 简单的实例Demo
 - [mybatis文件配置](demo/mybatis文件配置) 
 - [spring基于xml的Ioc配置](demo/spring基于xml的Ioc配置) 
+- [spring中jdbcTemplate的使用](demo/spring中jdbcTemplate的使用)
