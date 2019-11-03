@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="accountService" class="com.mine.service.impl.AccountServiceImpl">
+        <property name="accountDao" ref="accountDao"></property>
+    </bean>
+
+    <bean id="accountDao" class="com.mine.dao.impl.AccountImpl">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mysql://localhost:3306/jdbcDemo"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="12345678"></property>
+    </bean>
+    <!--配置事务管理器
+        1. 配置事务管理
+        2. 配置事务通知;  需要导入事务的约束:tx
+        3. 事务通知标签tx:advice.
+        4. 配置aop中的切入点表达式
+        5. 建立事务通知和切入点表达式的对应关系-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <!--事务的属性在tx:advice内部配置
+          transfer 表示业务层的方法-->
+        <tx:attributes>
+            <!--表示通配所有的方法-->
+            <tx:method name="*" propagation="REQUIRED" read-only="false"/>
+            <!--find表示匹配的查找方法,以find开头.-->
+            <tx:method name="find*" propagation="SUPPORTS" read-only="true"></tx:method>
+            <!-- isolation:表示事务的隔离级别,默认值为default,表示使用数据库的隔离级别.
+            propagation用于指定事务的传播行为.默认值是REQUIRED.表示一定会有事务,增删改的选择,查询方法
+            可以选择SUPPORTS.
+            read-only 用于指定事务只读,只有查询方法才能设置为true,默认是false,表示读写.
+            timeout用于指定事务的超时时间,默认值是-1,表示永不超时.如果指定了数值,则以秒为单位.
+            rollback-for用于指定一个异常,当产生该异常时,事务回滚,产生其他异常时,事务不回滚.没有默认值,表示任何异常事务都回滚.
+            no-rollback-for用于指定一个异常,当产生该异常时,事务不回滚,产生其他异常时,事务回滚.没有默认值,表示任何异常事务都回滚.-->
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <aop:pointcut id="pt" expression="execution(* com.mine.service.impl.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pt"></aop:advisor>
+    </aop:config>
+</beans>
