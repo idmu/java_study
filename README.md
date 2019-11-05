@@ -10,7 +10,7 @@
 - [mysql的crud及事务相关](note/mysql基础教程.md)  
 
 
-### 简单的实例Demo
+### 实例Demo
 
 
 - [springMvc的基本使用、文件上传、拦截器](demo/springMvc的基本使用、文件上传、拦截器) 
