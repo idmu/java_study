@@ -10,6 +10,8 @@
 
 ### 简单的实例Demo
 
+
+- [springMvc的基本使用、文件上传、拦截器](demo/springMvc的基本使用、文件上传、拦截器) 
 - [spring基于xml的声明式事务控制](demo/spring基于xml的声明式事务控制) 
 - [mybatis文件配置](demo/mybatis文件配置) 
 - [spring基于xml的Ioc配置](demo/spring基于xml的Ioc配置) 
