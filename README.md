@@ -1,6 +1,8 @@
 记录java的一些学习笔记、 知识点梳理. 
 
 ### java基础
+
+- [springMvc的基本使用、自定义异常处理、文件上传、拦截器等](note/springMvc使用教程.md)
 - [spring中基于xml和注解的AOP配置](note/spring中基于xml和注解的AOP配置.md)
 - [spring使用之基于注解的Ioc配置](note/Spring使用之基于注解的Ioc配置.md)
 - [spring使用之基于xml的Ioc配置](note/Spring使用之基于xml的Ioc配置.md)
