@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- 开启注解扫描，要扫描的是service和dao层的注解，要忽略web层注解，因为web层让SpringMVC框架 去管理 -->
+    <context:component-scan base-package="com.mine">
+    <!-- 配置注解不扫描的-->
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <!--spring整合mybatis框架-->
+    <!--配置连接池-->
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/ssm"/>
+        <property name="user" value="root"/>
+        <property name="password" value="12345678"/>
+    </bean>
+    <!--配置sqlSession工厂-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <!--配置AccountDao接口所在的包-->
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.mine.dao"/>
+    </bean>
+
+    <!--配置声明式事务管理-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <!--配置事务通知-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="find*" read-only="true"/>
+            <tx:method name="*" isolation="DEFAULT"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.mine.service.impl.AccountServiceImpl.*(..))"/>
+    </aop:config>
+</beans>
