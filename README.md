@@ -7,7 +7,7 @@
 - [spring使用之基于注解的Ioc配置](note/Spring使用之基于注解的Ioc配置.md)
 - [spring使用之基于xml的Ioc配置](note/Spring使用之基于xml的Ioc配置.md)
 - [mybatis基本使用之(xml)](note/mybatis基本使用之(xml).md)  
-- [mysql的crud及事务相关](note/mysql基础教程.md)  
+- [mysql基础全教程](note/mysql基础教程.md)  
 
 
 ### 实例Demo
