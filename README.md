@@ -3,6 +3,7 @@
 ### java基础
 - [mysql基础入门全家桶](note/mysql入门全家桶.md)  
 - [springMvc的基本使用、自定义异常处理、文件上传、拦截器等](note/springMvc使用教程.md)
+- [SSM的整合指南](note/SSM的整合.md) 
 - [springBoot部署工程及集成mybatis、junit、yml](note/springBoot部署工程及集成mybatis、junit、yml.md)
 - [spring基于xml和注解Aop实现](note/spring基于xml和注解的AOP实现.md)
 - [spring基于注解的Ioc实现](note/Spring基于注解的Ioc实现.md)
